@@ -1,4 +1,4 @@
-#Pets DB
+# Pets DB
 
 It is a NodeJs project which connects to mongodb and stores data of pets.
 
