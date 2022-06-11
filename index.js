@@ -17,6 +17,11 @@ const file = xlsx.readFile('pets.xlsx');
 const sheet = file.Sheets['Sheet1'];
 const data = xlsx.utils.sheet_to_json(sheet);
 
+//index route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname + '/Templates/index.html'));
+})
+
 //connect to mongoDB
 mongoose.connect(DB, { useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
     if (err) {
@@ -24,13 +29,6 @@ mongoose.connect(DB, { useNewUrlParser: true, useUnifiedTopology: true}, (err) =
     } else {
         console.log('connected to mongoDB');
 }})
-
-
-//index route
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname + '/Templates/index.html'));
-})
-
 
 //inserting Excel data into mongoDB using mongoose
 app.post('/api/pet', (req, res) => {
