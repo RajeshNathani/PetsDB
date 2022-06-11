@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></head>
+<body>
+    <nav class="navbar navbar-dark bg-info">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <h2>FastJobs</h2>
+        </a>
+        </div>
+      </nav><br/>
+    <div class="container">
+        <h1>Pets DB</h1><br/>
+        <div class="container">
+            <!--Get All Pets-->
+            <h5 class="text-secondary">#Get all the pets</h5> 
+            <a href="/api/pet" class="btn btn-info text-white">See All the pets</a><br/><br/>
+            <ul>
+                <li>
+                    It uses the GET method to get all the pets
+                </li>
+                <li>
+                    It returns a JSON object with all the pets
+                </li>
+                <li>
+                    It has route: /api/pet
+                </li>
+            </ul>
+            <hr>
+            <br/>
+
+            <!--Add pets from excel file-->
+            <h5 class="text-secondary">#Add pets do database</h5> 
+            <form method="post" action="/api/pet">
+                <button type="submit" class="btn btn-info text-white">Add Pets to Database</button>
+            </form><br/>
+            <ul>
+                <li>
+                    It uses the POST method to add pets to database
+                </li>
+                <li>
+                    It returns a string with the message "Pets added to database"
+                </li>
+                <li>
+                    It has route: /api/pet
+                </li>
+            </ul>
+            <hr>
+            <br/>
+
+            <!--Get A Pet by Id-->
+            <h5 class="text-secondary">#Get a pet by id</h5> 
+            <div class="form-group">
+                <input type="text" class="form-control" id="getAPet" name="id" placeholder="Enter Pet Id">
+            </div><br/>
+            <button type="submit" class="btn btn-info text-white" onclick="getAPet();">Get pet by id</button><br/><br/>
+            <ul>
+                <li>
+                    It uses the GET method to get a pet by id.
+                </li>
+                <li>
+                    It returns a JSON object with the pet
+                </li>
+                <li>
+                    It has route: /api/pet/{id}
+                </li>
+            </ul>
+            <hr>
+            <br/>
+
+            <!--Update A Pet-->
+            <h5 class="text-secondary">#Update a pet by id</h5>
+            <form method="post" id="updateForm">
+            <div class="form-group">
+                    <input type="text" class="form-control" id="id" name="id" placeholder="Enter Pet Id">
+            </div><br/>
+            <p class="text-danger">*The name of the pet with respective ID changes to Tomy on clicking it.</p>
+            <br>
+            </form>
+            <button class="btn btn-info text-white" onclick="updateAPet();">Update pet by id</button><br/><br/>
+            <ul>
+                <li>
+                    It uses the PATCH method to update a pet by id.
+                </li>
+                <li>
+                    It returns a string with the message "Pet updated"
+                </li>
+                <li>
+                    It has route: /api/pet/{id}
+                </li>
+            </ul>
+            <hr>
+            <br/>
+
+            <!--Delete A Pet-->
+            <h5 class="text-secondary">#Delete a pet by id</h5>
+            <form method="post" id="deleteForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="deleteAPet" name="id" placeholder="Enter Pet Id">
+                </div><br>
+            </form>
+            <button class="btn btn-info text-white" onclick="deleteAPet();">Delete pet by id</button><br/><br/>
+            <ul>
+                <li>
+                    It uses the DELETE method to delete a pet by id.
+                </li>
+                <li>
+                    It returns a string with the message "Pet deleted"
+                </li>
+                <li>
+                    It has route: /api/pet/{id}
+                </li>
+            </ul>
+        </div>
+        <br/><br/>
+    </div>
+    <script>
+        function getAPet(){
+            var id = document.getElementById("getAPet").value;
+            window.location.href = "/api/pet/"+id;
+        }
+        function deleteAPet(){
+            var id = document.getElementById("deleteAPet").value;
+            var form = document.getElementById("deleteForm");
+            form.action = "/api/pet/"+id+"?_method=DELETE";
+            form.submit();
+        }
+        function updateAPet(){
+            var id = document.getElementById("id").value;
+            var form = document.getElementById("updateForm");
+            form.action = "/api/pet/"+id+"?_method=PATCH";
+            form.submit();
+        }
+    </script>
+</body>
+</html>
